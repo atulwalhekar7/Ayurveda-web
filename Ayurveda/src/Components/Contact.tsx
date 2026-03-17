@@ -645,19 +645,20 @@ const ContactPage: React.FC = () => {
                   return HOURS.map(({ day, time, closed }, i) => {
                     const isToday = today === day;
                     return (
-                    <React.Fragment key={day}>
-                      {i > 0 && !isToday && !HOURS[i - 1]?.day && <div className="hours-separator" />}
-                      <div className={`hour-row${isToday ? " today" : ""}`}>
-                        <div className="hour-row-day">
-                          {isToday && <div className="today-pip" />}
-                          <span className={`hour-day-name${isToday ? " today" : ""}`}>{day}</span>
-                          {isToday && <span className="today-tag">Today</span>}
+                      <React.Fragment key={day}>
+                        {i > 0 && !isToday && !HOURS[i - 1]?.day && <div className="hours-separator" />}
+                        <div className={`hour-row${isToday ? " today" : ""}`}>
+                          <div className="hour-row-day">
+                            {isToday && <div className="today-pip" />}
+                            <span className={`hour-day-name${isToday ? " today" : ""}`}>{day}</span>
+                            {isToday && <span className="today-tag">Today</span>}
+                          </div>
+                          <span className={`hour-time${closed ? " closed" : isToday ? " today" : ""}`}>{time}</span>
                         </div>
-                        <span className={`hour-time${closed ? " closed" : isToday ? " today" : ""}`}>{time}</span>
-                      </div>
-                      {i < HOURS.length - 1 && <div className="hours-separator" />}
-                    </React.Fragment>
-                  );
+                        {i < HOURS.length - 1 && <div className="hours-separator" />}
+                      </React.Fragment>
+                    );
+                  });
                 })()}
               </div>
             </div>
