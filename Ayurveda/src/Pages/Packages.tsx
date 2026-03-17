@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Box,
   Container,
@@ -380,11 +380,7 @@ const PackageCard: React.FC<{
 };
 
 /* ─── Single row: exactly 2 cards side by side ──────────────────────────────── */
-const PackagePairRow: React.FC<{
-  left: (typeof packages)[0];
-  right?: (typeof packages)[0];
-  rowIndex: number;
-}> = ({ left, right, rowIndex }) => (
+
   <Grid container spacing={3} sx={{ mb: 3 }} alignItems="stretch" wrap="nowrap"
     style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "24px" }}
   >

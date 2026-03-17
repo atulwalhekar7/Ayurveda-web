@@ -640,10 +640,11 @@ const ContactPage: React.FC = () => {
                 <span className="hours-title">Opening Hours</span>
               </div>
               <div className="hours-list">
-const today = new Date().toLocaleDateString("en-AU", { weekday: "long" });
-                {HOURS.map(({ day, time, closed }, i) => {
-                  const isToday = today === day;
-                  return (
+                {(() => {
+                  const today = new Date().toLocaleDateString("en-AU", { weekday: "long" });
+                  return HOURS.map(({ day, time, closed }, i) => {
+                    const isToday = today === day;
+                    return (
                     <React.Fragment key={day}>
                       {i > 0 && !isToday && !HOURS[i - 1]?.day && <div className="hours-separator" />}
                       <div className={`hour-row${isToday ? " today" : ""}`}>
@@ -657,7 +658,7 @@ const today = new Date().toLocaleDateString("en-AU", { weekday: "long" });
                       {i < HOURS.length - 1 && <div className="hours-separator" />}
                     </React.Fragment>
                   );
-                })}
+                })()}
               </div>
             </div>
 

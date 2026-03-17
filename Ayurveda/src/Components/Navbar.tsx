@@ -174,10 +174,14 @@ const Navbar: React.FC = () => {
             <List>
               {NAV_LINKS.map((item) => (
 <ListItem
-                  component={Link}
-                  to={item.path}
+                  component="a"
+                  button
                   onClick={() => setDrawerOpen(false)}
                 >
+                  <Link to={item.path} style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                    <ListItemText primary={item.name} />
+                  </Link>
+                </ListItem>
                   <ListItemText primary={item.name} />
                 </ListItem>
               ))}

@@ -559,7 +559,7 @@ const AboutOmSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80"
               alt="Ayurvedic massage treatment"
             />
-             className="mosaic-badge"<img
+            <img
   className="mosaic-badge"
   src={logo}
   alt="Om Ayurveda Logo"
@@ -607,28 +607,7 @@ const AboutOmSection: React.FC = () => {
 };
 
 
-const QuoteCards: React.FC = () => {
-  const { ref, visible } = useFadeIn();
-  return (
-    <div className={`quote-grid fade-up ${visible ? "visible" : ""}`} ref={ref}>
-      {[
-        {
-          title: "Preventative Health",
-          text: "We believe in all-natural preventative health maintenance. Minimizing your exposure to toxic chemicals is the key to staying healthy. We provide all medicines made from natural sources — treating you in a Holistic Way.",
-        },
-        {
-          title: "Your Choice",
-          text: "It's all about choice when it comes to your own method of healing and staying healthy. We believe that by choosing all-natural methods whenever possible... you're choosing wisely.",
-        },
-      ].map(({ title, text }) => (
-        <div className="quote-card" key={title}>
-          <div className="quote-card-title">{title}</div>
-          <p className="quote-card-text">{text}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+
 
 
 const PractitionerSection: React.FC = () => {
