@@ -332,7 +332,7 @@ const I = ({ d, s = 16, c = C.bright, fill = false }: any) => (
 const PIN_D   = "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z";
 const PHONE_D = "M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 005 5l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17z";
 const MAIL_D  = "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z";
-const CLOCK_D = <>
+
   <circle cx="12" cy="12" r="10" stroke={C.bright} strokeWidth="1.8" fill="none"/>
   <polyline points="12,6 12,12 16,14" stroke={C.bright} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
 </>;
@@ -340,7 +340,7 @@ const CAM_D   = <>
   <polygon points="23,7 16,12 23,17 23,7" fill={C.bright}/>
   <rect x="1" y="5" width="15" height="14" rx="2" stroke={C.bright} strokeWidth="1.8" fill="none"/>
 </>;
-const ARROW_D = "M5 12h14M12 5l7 7-7 7";
+
 
 const SocSvg = ({ d, s = 19 }: { d: string; s?: number }) => (
   <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor"><path d={d} /></svg>
@@ -352,7 +352,7 @@ const WA = "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.
 /* ══════════════════════════════════════════
    DATA
 ══════════════════════════════════════════ */
-const HOURS = [
+
   { day: "Monday",    time: "2:30 – 5:30 pm" },
   { day: "Tuesday",   time: "2:30 – 5:30 pm" },
   { day: "Wednesday", time: "9:00 am – 5:30 pm" },
@@ -384,7 +384,7 @@ function useFadeIn(delay = 0) {
 ══════════════════════════════════════════ */
 const Footer: React.FC = () => {
   const navigate = useNavigate();
-  const today = new Date().toLocaleDateString("en-AU", { weekday: "long" });
+
 
   const { ref: r1, vis: v1 } = useFadeIn(0);
   const { ref: r2, vis: v2 } = useFadeIn(100);

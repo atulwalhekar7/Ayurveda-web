@@ -640,6 +640,7 @@ const ContactPage: React.FC = () => {
                 <span className="hours-title">Opening Hours</span>
               </div>
               <div className="hours-list">
+const today = new Date().toLocaleDateString("en-AU", { weekday: "long" });
                 {HOURS.map(({ day, time, closed }, i) => {
                   const isToday = today === day;
                   return (

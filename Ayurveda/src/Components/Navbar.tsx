@@ -174,7 +174,6 @@ const Navbar: React.FC = () => {
             <List>
               {NAV_LINKS.map((item) => (
 <ListItem
-                  button
                   component={Link}
                   to={item.path}
                   onClick={() => setDrawerOpen(false)}
