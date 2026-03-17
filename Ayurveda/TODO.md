@@ -1,18 +1,12 @@
-## TypeScript Build Fix Progress
+# TS Error Fixes Progress
 
-### ✅ PLAN APPROVED
-```
-1. [ ] Packages.tsx: Add imports + remove PackagePairRow  
-2. [ ] About.tsx: Fix img tags + remove QuoteCards
-3. [ ] Contact.tsx: Fix today scope + HOURS array
-4. [ ] Footer.tsx: Wrap SVG + remove unused consts + fix HOURS  
-5. [ ] Navbar.tsx: Fix ListItem button prop
-6. [ ] VERIFY: cd Ayurveda && npm run build ✅
-```
+## Planned Steps:
+✅ [x] 1. Create TODO.md (tracking)
+✅ [x] 2. Edit Footer.tsx - Remove unused CLOCK_D and HOURS constants
+✅ [x] 3. Edit Navbar.tsx - Fix ListItem to ListItemButton with Link component + import
+- [ ] 4. Verify no TS errors (npm run build / tsc)
+- [ ] 5. Test mobile drawer navigation
+- [ ] 6. Complete task
 
-### Current Status
-- [x] Analyzed errors across 6 files
-- [x] Created comprehensive fix plan  
-- [x] User approved plan
-- [x] Fixed all TypeScript errors in Packages.tsx, About.tsx, Contact.tsx, Footer.tsx, Navbar.tsx
+Current: Footer and Navbar fixed. Ready for verification.
 

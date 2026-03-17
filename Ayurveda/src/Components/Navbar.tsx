@@ -11,7 +11,7 @@ import {
   Container,
   Drawer,
   List,
-  ListItem,
+  ListItemButton,
   ListItemText,
   useMediaQuery,
   useTheme,
@@ -173,14 +173,14 @@ const Navbar: React.FC = () => {
           <Box sx={{ width: 250 }}>
             <List>
 {NAV_LINKS.map((item) => (
-                <ListItem button key={item.name} onClick={() => setDrawerOpen(false)}>
-                  <Link 
-                    to={item.path} 
-                    style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}
-                  >
-                    <ListItemText primary={item.name} />
-                  </Link>
-                </ListItem>
+                <ListItemButton 
+                  key={item.name} 
+                  component={Link}
+                  to={item.path}
+                  onClick={() => setDrawerOpen(false)}
+                >
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
               ))}
             </List>
           </Box>
