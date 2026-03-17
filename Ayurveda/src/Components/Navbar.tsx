@@ -173,14 +173,13 @@ const Navbar: React.FC = () => {
           <Box sx={{ width: 250 }}>
             <List>
 {NAV_LINKS.map((item) => (
-                <ListItem
-                  button
-                  component={Link}
-                  to={item.path}
-                  onClick={() => setDrawerOpen(false)}
-                  key={item.name}
-                >
-                  <ListItemText primary={item.name} />
+                <ListItem button key={item.name} onClick={() => setDrawerOpen(false)}>
+                  <Link 
+                    to={item.path} 
+                    style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}
+                  >
+                    <ListItemText primary={item.name} />
+                  </Link>
                 </ListItem>
               ))}
             </List>
