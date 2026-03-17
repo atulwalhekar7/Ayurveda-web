@@ -15,7 +15,7 @@ import {
   ListItemText,
   useMediaQuery,
   useTheme,
-  Divider,
+
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -173,9 +173,8 @@ const Navbar: React.FC = () => {
           <Box sx={{ width: 250 }}>
             <List>
               {NAV_LINKS.map((item) => (
-                <ListItem
+<ListItem
                   button
-                  key={item.name}
                   component={Link}
                   to={item.path}
                   onClick={() => setDrawerOpen(false)}

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 /* ─── Palette & Tokens ─── */
 const C = {
@@ -535,8 +535,6 @@ const ContactPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [snack, setSnack] = useState(false);
   const [snackOut, setSnackOut] = useState(false);
-
-  const today = new Date().toLocaleDateString("en-AU", { weekday: "long" });
 
   const validate = () => {
     const e: Record<string, string> = {};
