@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../assets/logo.png";
 
 import {
@@ -46,12 +48,13 @@ const WHITE = "#FFFFFF";
 
 const NAV_LINKS = [
   { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
+  { name: "About Us", path: "#about-section" },
   { name: "Services", path: "/services" },
   { name: "Packages", path: "/packages" },
-  { name: "Contact Us", path: "/contact" },
+  { name: "Contact Us", path: "#contact-section" },
   { name: "Testimonials", path: "/testimonials" },
 ];
+
 
 const TopBar: React.FC = () => (
   <Box
@@ -132,17 +135,53 @@ const TopBar: React.FC = () => (
   </Box>
 );
     
-const Logo: React.FC = () => (
-  <Box sx={{ display: "flex", alignItems: "center" }}>
-    <Box component="img" src={logo} alt="OM Ayurveda" sx={{ width: 120 }} />
-  </Box>
-);
+const Logo: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <Box 
+      sx={{ 
+        display: "flex", 
+        alignItems: "center",
+        cursor: "pointer"
+      }} 
+      onClick={() => {
+        navigate("/");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+    >
+      <Box component="img" src={logo} alt="OM Ayurveda" sx={{ width: 120 }} />
+    </Box>
+  );
+};
+
 
 const Navbar: React.FC = () => {
   const muiTheme = useTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("md"));
+  const navigate = useNavigate();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const scrollToSection = useCallback((hash: string) => {
+    // Navigate to home first
+    navigate("/", { replace: true });
+    
+    // Small delay for navigation + navbar height offset
+    setTimeout(() => {
+      const element = document.querySelector(hash);
+      if (element) {
+        const navbarHeight = 120; // Fixed navbar height (desktop) + topbar
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navbarHeight;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 100);
+  }, [navigate]);
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -167,20 +206,55 @@ const Navbar: React.FC = () => {
 
               {!isMobile && (
                 <Box sx={{ display: "flex", gap: 1 }}>
-                  {NAV_LINKS.map((item) => (
-                    <Button
-                      key={item.name}
-                      component={Link}
-                      to={item.path}
-                      sx={{
-                        color: "#333",
-                        fontWeight: 600,
-                        textTransform: "none",
-                      }}
-                    >
-                      {item.name}
-                    </Button>
-                  ))}
+{NAV_LINKS.map((item) => {
+                    if (item.path === "/") {
+                      return (
+                        <Button
+                          key={item.name}
+                          onClick={() => {
+                            navigate("/");
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }}
+                          sx={{
+                            color: "#333",
+                            fontWeight: 600,
+                            textTransform: "none",
+                          }}
+                        >
+                          {item.name}
+                        </Button>
+                      );
+                    } else if (item.path.startsWith("#")) {
+                      return (
+                        <Button
+                          key={item.name}
+                          onClick={() => scrollToSection(item.path)}
+                          sx={{
+                            color: "#333",
+                            fontWeight: 600,
+                            textTransform: "none",
+                          }}
+                        >
+                          {item.name}
+                        </Button>
+                      );
+                    }
+                    return (
+                      <Button
+                        key={item.name}
+                        component={Link}
+                        to={item.path}
+                        sx={{
+                          color: "#333",
+                          fontWeight: 600,
+                          textTransform: "none",
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    );
+                  })}
+
                 </Box>
               )}
 
@@ -221,16 +295,45 @@ const Navbar: React.FC = () => {
       >
         <Box sx={{ width: 250 }}>
           <List>
-            {NAV_LINKS.map((item) => (
-              <ListItemButton
-                key={item.name}
-                component={Link}
-                to={item.path}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            ))}
+{NAV_LINKS.map((item) => {
+              if (item.path === "/") {
+                return (
+                  <ListItemButton
+                    key={item.name}
+                    onClick={() => {
+                      navigate("/");
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                      setDrawerOpen(false);
+                    }}
+                  >
+                    <ListItemText primary={item.name} />
+                  </ListItemButton>
+                );
+              } else if (item.path.startsWith("#")) {
+                return (
+                  <ListItemButton
+                    key={item.name}
+                    onClick={() => {
+                      scrollToSection(item.path);
+                      setDrawerOpen(false);
+                    }}
+                  >
+                    <ListItemText primary={item.name} />
+                  </ListItemButton>
+                );
+              }
+              return (
+                <ListItemButton
+                  key={item.name}
+                  component={Link}
+                  to={item.path}
+                  onClick={() => setDrawerOpen(false)}
+                >
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              );
+            })}
+
           </List>
         </Box>
       </Drawer>

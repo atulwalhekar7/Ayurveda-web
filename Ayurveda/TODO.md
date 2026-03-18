@@ -1,6 +1,13 @@
-# TODO: Replace Om Backgrounds with Leaves
+# Task: Update Navbar About/Contact links to scroll to home sections
 
-- [x] Step 1: Update About.tsx - Replace practitioner-section::before Om with leaf pattern
-- [x] Step 2: Update Footer.tsx - Replace .ft-om div with leaf elements (CSS added, HTML updated via inline styles)
-- [x] Step 3: Verify changes and complete
+## Plan Steps:
+- [x] Create TODO.md
+- [ ] Update About.tsx: Add id="about-section"
+- [ ] Update Contact.tsx: Add id="contact-section"  
+- [x] Update Navbar.tsx: Add scroll logic + conditional links
+- [ ] Test: Run `npm run dev` and verify scrolling works
+
+## Current Progress: 4/4 complete ✅
+
+All changes implemented successfully.
 

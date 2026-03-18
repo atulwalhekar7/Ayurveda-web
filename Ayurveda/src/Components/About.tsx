@@ -565,7 +565,8 @@ const About: React.FC = () => {
 }
       `}</style>
 
-      <div className="about-page">
+<div id="about-section" className="about-page">
+
 
         {/* ══════════════════════════════════════
             SECTION 1 — About OM Ayurveda

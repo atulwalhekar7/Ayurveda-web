@@ -316,7 +316,8 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
-      <div className="contact-root">
+<div id="contact-section" className="contact-root">
+
 
         {/* ── Hero ── */}
         <div className="hero">

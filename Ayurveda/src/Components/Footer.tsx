@@ -294,7 +294,16 @@ const Footer = () => {
 
             {/* COL 1 — Brand */}
             <div ref={r1} className={`ft-brand ft-fade${v1 ? " vis" : ""}`}>
-              <img className="ft-logo-img" src={logo} alt="OM Ayurveda Logo" />
+<img 
+  className="ft-logo-img" 
+  src={logo} 
+  alt="OM Ayurveda Logo"
+  style={{ cursor: "pointer" }}
+  onClick={() => {
+    navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+/>
              <div className="ft-socials">
   
   {/* Facebook */}
