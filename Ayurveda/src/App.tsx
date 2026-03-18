@@ -7,6 +7,7 @@ import Packages from "./Pages/Packages";
 import Footer from "./Components/Footer";
 import Testimonials from "./Components/Testimonials";
 import TestimonialsSection from "./Components/TestimonialsSection";
+import AyurvedaServices from "./Pages/Services"; 
 
 export default function App() {
   return (
@@ -29,7 +30,10 @@ export default function App() {
           }
         />
 
-        {/* ── Full testimonials page (slider, no routing inside) ── */}
+        {/* ── Services page ── */}
+        <Route path="/services" element={<AyurvedaServices />} /> {/* ← add this */}
+
+        {/* ── Full testimonials page ── */}
         <Route path="/testimonials" element={<Testimonials />} />
 
         {/* ── Packages page ── */}
