@@ -71,16 +71,8 @@ const testimonials = [
   },
 ];
 
-const avatarColors = [
-  { bg: "#1B5E20", text: WH },
-  { bg: "#2E7D32", text: WH },
-  { bg: "#388E3C", text: WH },
-  { bg: "#43A047", text: WH },
-  { bg: "#4CAF50", text: WH },
-  { bg: "#1565C0", text: WH },
-  { bg: "#6A1B9A", text: WH },
-  { bg: "#AD1457", text: WH },
-];
+// const avatarColors = [...] // unused
+
 
 function useFadeIn(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);

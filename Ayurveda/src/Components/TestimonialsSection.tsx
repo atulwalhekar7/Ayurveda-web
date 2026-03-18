@@ -94,8 +94,7 @@ const StarRating: React.FC<{ count: number; hovered: boolean }> = ({ count, hove
 // ─── Testimonial Card ────────────────────────────────────────────────────────
 const TestimonialCard: React.FC<{
   t: (typeof testimonials)[0];
-  index: number;
-}> = ({ t, index }) => {
+}> = ({ t }) => {
   const [expanded, setExpanded] = useState(false);
   const [hovered, setHovered] = useState(false);
   const isLong = t.text.length > 200;
@@ -548,11 +547,7 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
               }}
             >
               {pageSlice.map((t) => (
-                <TestimonialCard
-                  key={t.id}
-                  t={t}
-                  index={testimonials.findIndex((x) => x.id === t.id)}
-                />
+              <TestimonialCard key={t.id} t={t} />
               ))}
             </Box>
           </Box>
