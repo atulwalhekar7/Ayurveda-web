@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import logo from "../assets/logo.png";
 import {
   AppBar,
   Box,
@@ -10,11 +11,11 @@ import {
   Container,
   Drawer,
   List,
-  ListItem,
+  ListItemButton,
   ListItemText,
   useMediaQuery,
   useTheme,
-  Divider,
+
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -96,29 +97,14 @@ Aveley, WA -6069        </Typography>
 
 const Logo: React.FC = () => (
   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+    
+
     <Box
-      sx={{
-        width: 46,
-        height: 46,
-        borderRadius: "50%",
-        border: `2px solid ${MID_GREEN}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Typography sx={{ fontSize: 22, color: DARK_GREEN }}>ॐ</Typography>
-    </Box>
-
-    <Box>
-      <Typography sx={{ fontWeight: 700, fontSize: 24, color: DARK_GREEN }}>
-        OM Ayurveda
-      </Typography>
-
-      <Typography sx={{ fontSize: 10, color: MID_GREEN }}>
-        A Holistic Healthcare Centre
-      </Typography>
-    </Box>
+  component="img"
+  src={logo}
+  alt="OM Ayurveda"
+  sx={{ width: 120 }}
+/>
   </Box>
 );
 
@@ -187,16 +173,15 @@ const Navbar: React.FC = () => {
         >
           <Box sx={{ width: 250 }}>
             <List>
-              {NAV_LINKS.map((item) => (
-                <ListItem
-                  button
-                  key={item.name}
+{NAV_LINKS.map((item) => (
+                <ListItemButton 
+                  key={item.name} 
                   component={Link}
                   to={item.path}
                   onClick={() => setDrawerOpen(false)}
                 >
                   <ListItemText primary={item.name} />
-                </ListItem>
+                </ListItemButton>
               ))}
             </List>
           </Box>

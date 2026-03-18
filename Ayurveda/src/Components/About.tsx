@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import logo from "../assets/logo.png";
 
 // ─── Fade-in hook ──────────────────────────────────────────────────────────────
 function useFadeIn(threshold = 0.12) {
@@ -167,7 +168,7 @@ const About: React.FC = () => {
           width: 64px;
           height: 64px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--dg3), var(--dg2));
+          background: linear-gradient(135deg, #fff, #ffffff);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -324,8 +325,8 @@ const About: React.FC = () => {
           position: relative;
         }
         .practitioner-img {
-          width: 100%;
-          height: 480px;
+          width: 90%;
+          height: 550px;
           object-fit: cover;
           border-radius: 20px;
           box-shadow: 0 20px 60px rgba(13,32,16,0.28);
@@ -337,7 +338,7 @@ const About: React.FC = () => {
           width: 72px;
           height: 72px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--dg3), var(--dg2));
+          background: linear-gradient(135deg, #fff, #ffffff);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -374,7 +375,6 @@ const About: React.FC = () => {
 
         /* ── AYURVEDA SECTION ── */
         .ayurveda-section {
-          padding: 100px 0;
           background: var(--white);
         }
         .ayurveda-grid {
@@ -551,7 +551,7 @@ const AboutOmSection: React.FC = () => {
             <div className="mosaic-blob" />
             <img
               className="mosaic-img-1"
-              src="https://images.unsplash.com/photo-1591971788241-0d58d58c90b5?w=800&q=80"
+              src="https://t4.ftcdn.net/jpg/06/63/78/23/240_F_663782373_xlytkfUwWaN13bVHcv8P9w1vnKjuXpkh.jpg"
               alt="Ayurvedic herbs and oils"
             />
             <img
@@ -559,7 +559,11 @@ const AboutOmSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80"
               alt="Ayurvedic massage treatment"
             />
-            <div className="mosaic-badge">ॐ</div>
+            <img
+  className="mosaic-badge"
+  src={logo}
+  alt="Om Ayurveda Logo"
+/>
           </div>
 
           {/* Right — Content */}
@@ -603,28 +607,7 @@ const AboutOmSection: React.FC = () => {
 };
 
 
-const QuoteCards: React.FC = () => {
-  const { ref, visible } = useFadeIn();
-  return (
-    <div className={`quote-grid fade-up ${visible ? "visible" : ""}`} ref={ref}>
-      {[
-        {
-          title: "Preventative Health",
-          text: "We believe in all-natural preventative health maintenance. Minimizing your exposure to toxic chemicals is the key to staying healthy. We provide all medicines made from natural sources — treating you in a Holistic Way.",
-        },
-        {
-          title: "Your Choice",
-          text: "It's all about choice when it comes to your own method of healing and staying healthy. We believe that by choosing all-natural methods whenever possible... you're choosing wisely.",
-        },
-      ].map(({ title, text }) => (
-        <div className="quote-card" key={title}>
-          <div className="quote-card-title">{title}</div>
-          <p className="quote-card-text">{text}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+
 
 
 const PractitionerSection: React.FC = () => {
@@ -638,14 +621,20 @@ const PractitionerSection: React.FC = () => {
           <div className="practitioner-img-wrap">
             <img
               className="practitioner-img"
-              src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80"
+              src="https://www.omayurveda.com.au/uploads/1/4/6/0/14606620/published/sejal-photo-om-ayurveda.png?1720256445"
               alt="Ayurveda Practitioner"
             />
-            <div className="practitioner-tag">
+            {/* <div className="practitioner-tag">
               <div className="practitioner-tag-name">Dr. Practitioner</div>
               <div className="practitioner-tag-role">Ayurveda Specialist</div>
-            </div>
-            <div className="practitioner-badge">ॐ</div>
+            </div> */}
+            
+              <img
+  className="practitioner-badge"
+  src={logo}
+  alt="Om Ayurveda Logo"
+/>
+          
           </div>
 
           {/* Right — Content */}

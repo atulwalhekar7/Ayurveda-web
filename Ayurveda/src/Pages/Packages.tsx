@@ -4,7 +4,7 @@ import {
   Container,
   Typography,
   Button,
-  Grid,
+
   Chip,
   Collapse,
 } from "@mui/material";
@@ -380,26 +380,8 @@ const PackageCard: React.FC<{
 };
 
 /* ─── Single row: exactly 2 cards side by side ──────────────────────────────── */
-const PackagePairRow: React.FC<{
-  left: (typeof packages)[0];
-  right?: (typeof packages)[0];
-  rowIndex: number;
-}> = ({ left, right, rowIndex }) => (
-  <Grid container spacing={3} sx={{ mb: 3 }} alignItems="stretch" wrap="nowrap"
-    style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "24px" }}
-  >
-    <Box sx={{ minWidth: 0 }}>
-      <PackageCard pkg={left} fromLeft={true} animDelay={rowIndex * 80} />
-    </Box>
-    {right ? (
-      <Box sx={{ minWidth: 0 }}>
-        <PackageCard pkg={right} fromLeft={false} animDelay={rowIndex * 80 + 90} />
-      </Box>
-    ) : (
-      <Box sx={{ minWidth: 0 }} />
-    )}
-  </Grid>
-);
+
+
 
 /* ─── Hero ──────────────────────────────────────────────────────────────────── */
 const Hero: React.FC = () => {

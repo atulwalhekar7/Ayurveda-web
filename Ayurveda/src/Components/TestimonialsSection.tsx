@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Box, Container, Typography, Button, Chip } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
@@ -157,7 +157,6 @@ const testimonials = [
   },
 ];
 
-// Avatar color palette cycling
 const avatarColors = [
   { bg: "#1B5E20", text: WH },
   { bg: "#2E7D32", text: WH },
@@ -169,24 +168,8 @@ const avatarColors = [
   { bg: "#AD1457", text: WH },
 ];
 
-function useFadeIn(delay = 0) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [vis, setVis] = useState(false);
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setTimeout(() => setVis(true), delay);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.08 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [delay]);
-  return { ref, vis };
-}
+const CARDS_PER_PAGE = 2;
+const totalPages = Math.ceil(testimonials.length / CARDS_PER_PAGE);
 
 const StarRating: React.FC<{ count: number }> = ({ count }) => (
   <Box sx={{ display: "flex", gap: 0.25 }}>
@@ -201,21 +184,13 @@ const TestimonialCard: React.FC<{
   index: number;
 }> = ({ t, index }) => {
   const [expanded, setExpanded] = useState(false);
-  const { ref, vis } = useFadeIn((index % 2) * 90);
   const avatarColor = avatarColors[index % avatarColors.length];
   const isLong = t.text.length > 200;
   const displayText = !expanded && isLong ? t.text.slice(0, 200) + "…" : t.text;
 
   return (
     <Box
-      ref={ref}
       sx={{
-        opacity: vis ? 1 : 0,
-        transform: vis
-          ? "translateY(0)"
-          : "translateY(32px)",
-        transition: `opacity 0.6s cubic-bezier(0.16,1,0.3,1) ${(index % 2) * 90}ms,
-                     transform 0.6s cubic-bezier(0.16,1,0.3,1) ${(index % 2) * 90}ms`,
         background: WH,
         borderRadius: "20px",
         border: `1.5px solid ${AG}22`,
@@ -223,34 +198,22 @@ const TestimonialCard: React.FC<{
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        transition2: "box-shadow .3s ease, border-color .3s ease, transform .3s ease",
+        height: "100%",
+        transition: "box-shadow .3s ease, border-color .3s ease, transform .3s ease",
         "&:hover": {
           transform: "translateY(-5px)",
           boxShadow: `0 16px 48px ${DG}22`,
           border: `1.5px solid ${AG}55`,
-          transition: "all .3s cubic-bezier(0.16,1,0.3,1)",
         },
       }}
     >
       {/* Top green accent bar */}
-      <Box
-        sx={{
-          height: 5,
-          background: `linear-gradient(to right, ${DG}, ${AG})`,
-        }}
-      />
+      <Box sx={{ height: 5, background: `linear-gradient(to right, ${DG}, ${AG})` }} />
 
       <Box sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
-        {/* Quote icon */}
+        {/* Quote icon + tag */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-          <FormatQuoteIcon
-            sx={{
-              fontSize: 36,
-              color: `${AG}55`,
-              mt: -0.5,
-              ml: -0.5,
-            }}
-          />
+          <FormatQuoteIcon sx={{ fontSize: 36, color: `${AG}55`, mt: -0.5, ml: -0.5 }} />
           <Chip
             label={t.tag}
             size="small"
@@ -269,14 +232,7 @@ const TestimonialCard: React.FC<{
 
         {/* Review text */}
         <Box sx={{ flex: 1 }}>
-          <Typography
-            sx={{
-              fontFamily: "'Jost', sans-serif",
-              fontSize: 14,
-              lineHeight: 1.8,
-              color: TEXT,
-            }}
-          >
+          <Typography sx={{ fontFamily: "'Jost', sans-serif", fontSize: 14, lineHeight: 1.8, color: TEXT }}>
             {displayText}
           </Typography>
           {isLong && (
@@ -307,7 +263,6 @@ const TestimonialCard: React.FC<{
         {/* Author row */}
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-            {/* Avatar */}
             <Box
               sx={{
                 width: 42,
@@ -345,14 +300,7 @@ const TestimonialCard: React.FC<{
               >
                 {t.name}
               </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "'Jost', sans-serif",
-                  fontSize: 11,
-                  color: MUTED,
-                  letterSpacing: 0.3,
-                }}
-              >
+              <Typography sx={{ fontFamily: "'Jost', sans-serif", fontSize: 11, color: MUTED, letterSpacing: 0.3 }}>
                 Verified Patient
               </Typography>
             </Box>
@@ -365,11 +313,54 @@ const TestimonialCard: React.FC<{
 };
 
 const OMAyurvedaTestimonialsPage: React.FC = () => {
-  const { ref: heroRef, vis: heroVis } = useFadeIn(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [heroVis, setHeroVis] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStartX = useRef(0);
 
+  // Hero fade-in
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setHeroVis(true); obs.disconnect(); } },
+      { threshold: 0.08 }
+    );
+    if (heroRef.current) obs.observe(heroRef.current);
+    return () => obs.disconnect();
   }, []);
+
+  const goTo = useCallback(
+    (page: number) => {
+      setCurrentPage(((page % totalPages) + totalPages) % totalPages);
+    },
+    []
+  );
+
+  // Autoplay
+  useEffect(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (isPlaying) {
+      timerRef.current = setInterval(() => setCurrentPage((p) => (p + 1) % totalPages), 4000);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [isPlaying]);
+
+  const handlePrev = () => { goTo(currentPage - 1); setIsPlaying(false); };
+  const handleNext = () => { goTo(currentPage + 1); setIsPlaying(false); };
+  const handleDot = (i: number) => { goTo(i); setIsPlaying(false); };
+
+  // Touch swipe
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 40) { goTo(currentPage + (dx < 0 ? 1 : -1)); setIsPlaying(false); }
+  };
+
+  const pageSlice = testimonials.slice(
+    currentPage * CARDS_PER_PAGE,
+    currentPage * CARDS_PER_PAGE + CARDS_PER_PAGE
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -439,11 +430,6 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
                 fontFamily: "'Jost', sans-serif", fontWeight: 600,
                 fontSize: 12, letterSpacing: 5, color: AG,
                 textTransform: "uppercase", mb: 2,
-                animation: heroVis ? "fadeUp 0.6s ease 0.1s both" : "none",
-                "@keyframes fadeUp": {
-                  from: { opacity: 0, transform: "translateY(14px)" },
-                  to: { opacity: 1, transform: "translateY(0)" },
-                },
               }}>
                 Patient Stories
               </Typography>
@@ -451,7 +437,6 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
                 fontFamily: "'Cormorant Garamond', serif", fontWeight: 700,
                 fontSize: { xs: 42, md: 64 }, color: WH,
                 lineHeight: 1.05, mb: 2.5,
-                animation: heroVis ? "fadeUp 0.7s ease 0.2s both" : "none",
               }}>
                 Testimonials
               </Typography>
@@ -459,98 +444,126 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
                 fontFamily: "'Jost', sans-serif",
                 fontSize: { xs: 15, md: 17 }, color: "#ffffffbb",
                 maxWidth: 540, mx: "auto", lineHeight: 1.8, mb: 5,
-                animation: heroVis ? "fadeUp 0.7s ease 0.3s both" : "none",
               }}>
                 Real experiences from our patients. Every story is a journey toward holistic health and natural healing.
               </Typography>
 
               {/* Stats */}
-              <Box sx={{
-                display: "flex", justifyContent: "center",
-                gap: { xs: 4, md: 8 }, flexWrap: "wrap",
-                animation: heroVis ? "fadeUp 0.7s ease 0.4s both" : "none",
-              }}>
-                {[
-                  { val: "17+", label: "Reviews" },
-                  { val: "5★", label: "Average Rating" },
-                  { val: "100%", label: "Natural Care" },
-                ].map(({ val, label }) => (
-                  <Box key={label} sx={{ textAlign: "center" }}>
-                    <Typography sx={{
-                      fontFamily: "'Cormorant Garamond', serif", fontWeight: 700,
-                      fontSize: { xs: 30, md: 40 }, color: WH, lineHeight: 1,
-                    }}>{val}</Typography>
-                    <Typography sx={{
-                      fontFamily: "'Jost', sans-serif", fontSize: 11,
-                      color: "#ffffffaa", letterSpacing: 1.5,
-                      textTransform: "uppercase", mt: 0.4,
-                    }}>{label}</Typography>
-                  </Box>
-                ))}
-              </Box>
+             
             </Box>
           </Container>
         </Box>
 
-        {/* ── Cards Grid: 2 per row ── */}
+        {/* ── Slider ── */}
         <Container maxWidth="lg" sx={{ mt: 7 }}>
+          {/* Cards */}
           <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-              gap: 3,
-            }}
+            sx={{ overflow: "hidden", borderRadius: "16px" }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={t.id} t={t} index={i} />
-            ))}
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                gap: 3,
+                transition: "opacity 0.4s ease",
+              }}
+            >
+              {pageSlice.map((t) => (
+                <TestimonialCard
+                  key={t.id}
+                  t={t}
+                  index={testimonials.findIndex((x) => x.id === t.id)}
+                />
+              ))}
+            </Box>
           </Box>
+
+          {/* Controls */}
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 2, mt: 4 }}>
+            {/* Prev */}
+            <Box
+              component="button"
+              onClick={handlePrev}
+              sx={{
+                width: 40, height: 40, borderRadius: "50%",
+                border: `1.5px solid ${MG}44`, background: WH,
+                color: DG, fontSize: 18, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "all .2s ease",
+                "&:hover": { background: LG, borderColor: MG },
+              }}
+            >
+              ←
+            </Box>
+
+            {/* Dots */}
+            <Box sx={{ display: "flex", gap: 0.75, alignItems: "center" }}>
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <Box
+                  key={i}
+                  component="button"
+                  onClick={() => handleDot(i)}
+                  sx={{
+                    width: i === currentPage ? 20 : 7,
+                    height: 7,
+                    borderRadius: "4px",
+                    background: i === currentPage ? DG : `${MG}44`,
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "all .3s ease",
+                    p: 0,
+                  }}
+                />
+              ))}
+            </Box>
+
+            {/* Next */}
+            <Box
+              component="button"
+              onClick={handleNext}
+              sx={{
+                width: 40, height: 40, borderRadius: "50%",
+                border: `1.5px solid ${MG}44`, background: WH,
+                color: DG, fontSize: 18, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "all .2s ease",
+                "&:hover": { background: LG, borderColor: MG },
+              }}
+            >
+              →
+            </Box>
+
+            {/* Autoplay toggle */}
+            <Box
+              component="button"
+              onClick={() => setIsPlaying((p) => !p)}
+              title={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+              sx={{
+                width: 34, height: 34, borderRadius: "50%",
+                border: `1.5px solid ${MG}44`, background: WH,
+                color: DG, fontSize: 13, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "all .2s ease",
+                "&:hover": { background: LG },
+              }}
+            >
+              {isPlaying ? "⏸" : "▶"}
+            </Box>
+          </Box>
+
+          {/* Page indicator */}
+          <Typography sx={{
+            textAlign: "center", mt: 1.5,
+            fontFamily: "'Jost', sans-serif", fontSize: 12,
+            color: MUTED, letterSpacing: 0.5,
+          }}>
+            {currentPage + 1} / {totalPages}
+          </Typography>
         </Container>
 
-        {/* ── Bottom CTA ── */}
-        <Container maxWidth="sm" sx={{ mt: 9 }}>
-          <Box sx={{
-            background: `linear-gradient(135deg, ${DG}, ${MG})`,
-            borderRadius: "22px",
-            px: { xs: 4, md: 6 }, py: 6,
-            textAlign: "center",
-            position: "relative", overflow: "hidden",
-          }}>
-            <Typography sx={{
-              position: "absolute", right: 14, top: "50%",
-              transform: "translateY(-50%)",
-              fontSize: 140, fontFamily: "serif",
-              color: "#ffffff07", lineHeight: 1, userSelect: "none",
-              animation: "omSpin 30s linear infinite",
-            }}>ॐ</Typography>
-            <Typography sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 700, fontSize: { xs: 26, md: 34 },
-              color: WH, lineHeight: 1.25, mb: 1.5, position: "relative",
-            }}>
-              Ready to start your healing journey?
-            </Typography>
-            <Typography sx={{
-              fontFamily: "'Jost', sans-serif",
-              fontSize: 15, color: "#ffffffbb",
-              mb: 3.5, lineHeight: 1.75, position: "relative",
-            }}>
-              Join our community of patients who have transformed their health through Ayurveda.
-            </Typography>
-            <Button variant="contained" sx={{
-              fontFamily: "'Jost', sans-serif",
-              fontWeight: 700, fontSize: 13.5, letterSpacing: 1.5,
-              textTransform: "uppercase",
-              background: WH, color: DG,
-              borderRadius: "8px", px: 5, py: 1.5,
-              boxShadow: "none", position: "relative",
-              transition: "all .25s ease",
-              "&:hover": { background: LG, transform: "translateY(-3px)", boxShadow: `0 10px 28px #00000033` },
-            }}>
-              Book Consultation
-            </Button>
-          </Box>
-        </Container>
+       
 
         {/* Footer */}
         <Box sx={{ textAlign: "center", mt: 8, pb: 2 }}>

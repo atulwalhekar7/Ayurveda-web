@@ -3,8 +3,10 @@ import Navbar from "./Components/Navbar";
 import Banner from "./Components/Banner";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
-import Testimonials from "./Components/Testimonials";
 import Packages from "./Pages/Packages";
+import Footer from "./Components/Footer";
+import Testimonials from "./Components/Testimonials";
+import TestimonialsSection from "./Components/TestimonialsSection";
 
 export default function App() {
   return (
@@ -12,19 +14,27 @@ export default function App() {
       <Navbar />
 
       <Routes>
+
+        {/* ── Home page ── */}
         <Route
           path="/"
           element={
             <>
               <Banner />
               <About />
+              <TestimonialsSection />
               <Contact />
-              <Testimonials />
+              <Footer />
             </>
           }
         />
 
+        {/* ── Full testimonials page (slider, no routing inside) ── */}
+        <Route path="/testimonials" element={<Testimonials />} />
+
+        {/* ── Packages page ── */}
         <Route path="/packages" element={<Packages />} />
+
       </Routes>
     </div>
   );
