@@ -33,3 +33,6 @@ Thumbs.db
 
 # coverage reports
 coverage/
+
+# Linter cache
+.eslintcache

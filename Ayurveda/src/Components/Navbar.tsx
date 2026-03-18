@@ -76,18 +76,19 @@ const TopBar: React.FC = () => (
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
         <LocationOnIcon sx={{ fontSize: 15, color: ACCENT_GREEN }} />
         <Typography variant="caption">
-          123, Green Park, Amritsar-143001 (India)
-        </Typography>
+Ayurveda Practitioner
+2 Redmires Road
+Aveley, WA -6069        </Typography>
       </Box>
 
       <Box sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center", gap: 0.5 }}>
         <EmailIcon sx={{ fontSize: 14, color: ACCENT_GREEN }} />
-        <Typography variant="caption">info@omayurveda.com</Typography>
+        <Typography variant="caption">omayurveda@hotmail.com</Typography>
       </Box>
 
       <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 0.5 }}>
         <PhoneIcon sx={{ fontSize: 14, color: ACCENT_GREEN }} />
-        <Typography variant="caption">+91-98765-43210</Typography>
+        <Typography variant="caption">0433401505</Typography>
       </Box>
     </Box>
   </Box>
