@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const slides = [
   {
@@ -48,6 +50,7 @@ export default function Banner() {
       setAnimating(false);
     }, 700);
   };
+const navigate = useNavigate();
 
   const prev = () => goTo((current - 1 + slides.length) % slides.length, "left");
   const next = () => goTo((current + 1) % slides.length, "right");
@@ -231,18 +234,18 @@ export default function Banner() {
           animation: fadeUp 0.8s ease 0.6s forwards;
         }
 
-        .slide-desc {
-          font-family: 'Jost', sans-serif;
-          font-weight: 300;
-          font-size: clamp(0.82rem, 1.5vw, 1rem);
-          color: rgba(220, 240, 228, 0.72);
-          max-width: 540px;
-          line-height: 1.8;
-          letter-spacing: 0.04em;
-          margin-bottom: 2.4rem;
-          opacity: 0;
-          animation: fadeUp 0.8s ease 0.75s forwards;
-        }
+       .slide-desc {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400; /* slightly stronger */
+  font-size: clamp(0.82rem, 1.5vw, 1rem);
+  color: rgba(255, 255, 255, 0.9); /* 👈 darker & clearer */
+  max-width: 540px;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  margin-bottom: 2.4rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.75s forwards;
+}
 
         .cta-group {
           display: flex;
@@ -477,9 +480,18 @@ export default function Banner() {
             <p className="slide-desc">{slides[current].description}</p>
 
             <div className="cta-group">
-              <button className="btn-primary">Book a Consultation</button>
-              <button className="btn-secondary">Explore Therapies</button>
-            </div>
+            <button
+  className="btn-primary"
+  onClick={() => window.open("https://calendly.com/", "_blank")}
+>
+  Book a Consultation
+</button>
+<button
+  className="btn-secondary"
+  onClick={() => navigate("/packages")}
+>
+  Explore Therapies
+</button>            </div>
           </div>
         </div>
 

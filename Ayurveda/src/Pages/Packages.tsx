@@ -502,47 +502,7 @@ const Hero: React.FC = () => {
           </Typography>
 
           {/* Stats */}
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              gap: { xs: 4, md: 8 },
-              flexWrap: "wrap",
-              animation: vis ? "fadeUp 0.7s ease 0.4s both" : "none",
-            }}
-          >
-            {[
-              { val: "10", label: "Packages" },
-              { val: "5000+", label: "Years of Wisdom" },
-              { val: "100%", label: "Natural Medicine" },
-            ].map(({ val, label }) => (
-              <Box key={label} sx={{ textAlign: "center" }}>
-                <Typography
-                  sx={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontWeight: 700,
-                    fontSize: { xs: 32, md: 42 },
-                    color: WH,
-                    lineHeight: 1,
-                  }}
-                >
-                  {val}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: "'Jost', sans-serif",
-                    fontSize: 11,
-                    color: "#ffffffaa",
-                    letterSpacing: 1.5,
-                    textTransform: "uppercase",
-                    mt: 0.4,
-                  }}
-                >
-                  {label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+         
         </Box>
       </Container>
     </Box>

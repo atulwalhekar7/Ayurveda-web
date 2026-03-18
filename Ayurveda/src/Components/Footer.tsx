@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/Om logo.png";
 
 /* ══════════════════════════════════════════
    TOKENS  —  Dark Green & White
@@ -20,7 +20,9 @@ const C = {
   dim:     "#2a3e2a",
   gold:    "#c8a96e",
 };
-
+const YT = (
+  <path d="M23.5 6.2s-.2-1.7-.8-2.5c-.8-1-1.7-1-2.1-1.1C17.6 2.3 12 2.3 12 2.3h0s-5.6 0-8.6.3c-.4 0-1.3.1-2.1 1.1-.6.8-.8 2.5-.8 2.5S0 8.2 0 10.1v1.8c0 1.9.5 3.9.5 3.9s.2 1.7.8 2.5c.8 1 1.9 1 2.4 1.1 1.8.2 7.6.3 7.6.3s5.6 0 8.6-.3c.4 0 1.3-.1 2.1-1.1.6-.8.8-2.5.8-2.5s.5-2 .5-3.9v-1.8c0-1.9-.5-3.9-.5-3.9zM9.5 14.7V7.8l6.3 3.5-6.3 3.4z" />
+);
 /* ══════════════════════════════════════════
    CSS
 ══════════════════════════════════════════ */
@@ -293,12 +295,68 @@ const Footer = () => {
             {/* COL 1 — Brand */}
             <div ref={r1} className={`ft-brand ft-fade${v1 ? " vis" : ""}`}>
               <img className="ft-logo-img" src={logo} alt="OM Ayurveda Logo" />
-              <div className="ft-socials">
-                <a className="ft-soc ft-soc-fb" href="#" aria-label="Facebook"><SocSvg d={FB} /></a>
-                <a className="ft-soc ft-soc-ig" href="#" aria-label="Instagram"><SocSvg d={IG} /></a>
-                <a className="ft-soc ft-soc-wa" href="https://wa.me/61433401505" aria-label="WhatsApp"><SocSvg d={WA} /></a>
-              </div>
-            </div>
+             <div className="ft-socials">
+  
+  {/* Facebook */}
+  <a
+    className="ft-soc ft-soc-fb"
+    href="https://www.facebook.com/omayurveda.com.au?mibextid=ZbWKwL"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+  >
+    <SocSvg d={FB} />
+  </a>
+
+  {/* Instagram */}
+  <a
+    className="ft-soc ft-soc-ig"
+    href="https://www.instagram.com/om_ayurvedaperth?utm_source=qr&igshid=OGU0MmVlOWVjOQ%3D%3D"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <SocSvg d={IG} />
+  </a>
+
+  {/* WhatsApp */}
+  <a
+    className="ft-soc ft-soc-wa"
+    href="https://wa.me/61433401505"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+  >
+    <SocSvg d={WA} />
+  </a>
+
+  {/* Email (instead of empty YouTube) */}
+ <a
+  className="ft-soc"
+  href="mailto:omayurveda@hotmail.com"
+  aria-label="Email"
+  style={{
+    background: "#4CAF5014",
+    borderColor: "#4CAF5030",
+    color: "#4CAF50",
+  }}
+>
+  <svg
+    width="19"
+    height="19"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#4CAF50"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="4" width="20" height="16" rx="3" />
+    <path d="M2 6l10 7 10-7" />
+  </svg>
+</a>
+</div>
+          </div>
 
             {/* COL 2 — Quick Links */}
             <div ref={r2} className={`ft-fade${v2 ? " vis" : ""}`} style={{ transitionDelay: "0.1s" }}>

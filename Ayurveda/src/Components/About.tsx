@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../assets/logo.png";
+import SpaIcon from "@mui/icons-material/Spa";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import SchoolIcon from "@mui/icons-material/School";
+import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
+import practitionerImg from "../assets/AboutImage.png";
 
 // ─── Fade-in hook ──────────────────────────────────────────────────────────────
 function useFadeIn(threshold = 0.12) {
@@ -509,6 +515,54 @@ const About: React.FC = () => {
           font-weight: 500;
           letter-spacing: 0.06em;
         }
+
+        /* ── Practitioner Stats ── */
+.practitioner-stats {
+  position: absolute;
+  bottom: 30px;
+  left: -30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 5;
+}
+
+.stat-box {
+  background: var(--white);
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(13,32,16,0.2);
+  min-width: 150px;
+  border-left: 4px solid var(--dg3);
+  transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+}
+
+.stat-box .stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dg);
+}
+
+.stat-box .stat-label {
+  font-size: 0.75rem;
+  color: var(--dg3);
+  letter-spacing: 0.05em;
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  .practitioner-stats {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15px;
+  }
+}
       `}</style>
 
       <div className="about-page">
@@ -584,9 +638,9 @@ const AboutOmSection: React.FC = () => {
 
             <div className="pills">
               {[
-                { icon: "🌿", label: "Preventative Health" },
-                { icon: "💚", label: "Holistic Way" },
-                { icon: "✨", label: "Natural Healing" },
+               { icon: <SpaIcon fontSize="small" />, label: "Preventative Health" },
+{ icon: <FavoriteIcon fontSize="small" />, label: "Holistic Way" },
+{ icon: <AutoAwesomeIcon fontSize="small" />, label: "Natural Healing" },
               ].map(({ icon, label }) => (
                 <div className="pill" key={label}>
                   <span className="pill-icon">{icon}</span>
@@ -619,23 +673,32 @@ const PractitionerSection: React.FC = () => {
 
           {/* Left — Image */}
           <div className="practitioner-img-wrap">
-            <img
-              className="practitioner-img"
-              src="https://www.omayurveda.com.au/uploads/1/4/6/0/14606620/published/sejal-photo-om-ayurveda.png?1720256445"
-              alt="Ayurveda Practitioner"
-            />
-            {/* <div className="practitioner-tag">
-              <div className="practitioner-tag-name">Dr. Practitioner</div>
-              <div className="practitioner-tag-role">Ayurveda Specialist</div>
-            </div> */}
-            
-              <img
-  className="practitioner-badge"
-  src={logo}
-  alt="Om Ayurveda Logo"
-/>
-          
-          </div>
+  <img
+    className="practitioner-img"
+    src={practitionerImg}
+    alt="Ayurveda Practitioner"
+  />
+
+  {/* ✅ Stats Boxes */}
+  <div className="practitioner-stats">
+    {[
+      { value: "10+", label: "Years Experience" },
+      { value: "", label: "Ayurvedic Knowledge" },
+      { value: "", label: "Therapy Guidance" },
+    ].map((item, index) => (
+      <div className="stat-box" key={index}>
+        <div className="stat-value">{item.value}</div>
+        <div className="stat-label">{item.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <img
+    className="practitioner-badge"
+    src={logo}
+    alt="Om Ayurveda Logo"
+  />
+</div>
 
           {/* Right — Content */}
           <div>
@@ -652,9 +715,9 @@ const PractitionerSection: React.FC = () => {
 
             <div className="pills" style={{ marginTop: 8 }}>
               {[
-                { icon: "🎓", label: "Certified Specialist" },
-                { icon: "🌿", label: "Panchakarma Expert" },
-                { icon: "🧘", label: "Mind-Body Wellness" },
+               { icon: <SchoolIcon fontSize="small" />, label: "Certified Specialist" },
+{ icon: <SpaIcon fontSize="small" />, label: "Panchakarma Expert" },
+{ icon: <SelfImprovementIcon fontSize="small" />, label: "Mind-Body Wellness" },
               ].map(({ icon, label }) => (
                 <div className="pill" key={label}>
                   <span className="pill-icon">{icon}</span>

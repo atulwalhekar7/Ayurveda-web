@@ -414,7 +414,6 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        <p className="footer">© 2024 OM Ayurveda · Natural Healing for Body & Mind</p>
       </div>
     </>
   );

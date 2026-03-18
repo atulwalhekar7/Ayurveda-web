@@ -17,203 +17,169 @@ const WH = "#FFFFFF";
 const CREAM = "#F4FAF4";
 const TEXT = "#1c2e1c";
 const MUTED = "#4a6349";
+const MAPS_URL =
+  "https://www.google.com/maps/place/OM+Ayurveda+-+A+Holistic+Healthcare+Centre";
 
 const testimonials = [
   {
     id: 1,
-    name: "Ambbi Devarajoo",
-    initials: "AD",
-    text: "I am glad to find this OM Ayurvedic in Perth. Sejal takes her time to look into our issues and her advises are practical and doable...Highly recommended.",
-    tag: "General Wellness",
-    stars: 5,
-  },
-  {
-    id: 2,
     name: "Ravinder Kaur",
-    initials: "RK",
-    text: "Severe pain in my hands made it difficult to move them when I visited Sejal for treatment. But, thanks to her expertise in massage and steam therapy and medicine. I'm now feeling much improved. Highly recommend Sejal for health issues like arthritis; she truly cares about your well-being.",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    text: "I had severe pain in my hands and couldn't move properly. After treatment here, I feel much better. The therapies and medicines really worked. Highly recommend for arthritis problems.",
     tag: "Arthritis",
     stars: 5,
   },
   {
-    id: 3,
+    id: 2,
     name: "Kajol Arora",
-    initials: "KA",
-    text: "I had an exceptional experience at OM Ayurveda. The practitioner is highly knowledgeable and truly care about their patients. The personalized treatment plan she designed for me has significantly improved my immunity and overall well-being. The ambiance of the clinic is serene and welcoming, making each visit a relaxing experience. I highly recommend OM Ayurveda to anyone seeking holistic and natural healthcare solutions.",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    text: "Amazing experience! The treatment plan improved my immunity and overall health. The clinic environment is calm and very relaxing. Truly holistic care.",
     tag: "Immunity",
     stars: 5,
   },
   {
-    id: 4,
+    id: 3,
     name: "Dhwani Shah",
-    initials: "DS",
-    text: "Dr Sejal is absolutely amazing at curing. She has the best knowledge almost about everything in health care. She has a huge experience & that's more important in this firm. Her recommendations are to the point always. Her given medicines has already cured my skin problems from the roots. Very happy with her service.",
+    image: "https://randomuser.me/api/portraits/women/12.jpg",
+    text: "Very knowledgeable doctor. My skin issues improved from the root. The advice is always practical and effective. Highly satisfied with the service.",
     tag: "Skin Health",
     stars: 5,
   },
   {
-    id: 5,
+    id: 4,
     name: "Arian Kazemi",
-    initials: "AK",
-    text: "Sejal has a holistic approach, very helpful! I have improved drastically since seeing Sejal, just once. Have referred many others. She is the best!!",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    text: "Holistic approach and very helpful. I saw improvement even after one session. Highly recommended.",
     tag: "Holistic Care",
     stars: 5,
   },
   {
-    id: 6,
+    id: 5,
     name: "Jalpa Patel",
-    initials: "JP",
-    text: "One word — just excellent service and got recovered fast from my illness. Mrs Sejal is very nice person too with good attention for individual's pain.",
+    image: "https://randomuser.me/api/portraits/women/25.jpg",
+    text: "Excellent service. I recovered quickly and felt better within days. Very caring and attentive treatment.",
     tag: "Recovery",
     stars: 5,
   },
   {
-    id: 7,
+    id: 6,
     name: "Mayank",
-    initials: "MY",
-    text: "I recently tried an Ayurvedic digestive supplement for managing heartburn, and it exceeded my expectations. Its natural ingredients effectively eased my digestion and provided relief from heartburn symptoms, leaving me feeling much more comfortable after meals. I highly recommend this product to anyone seeking a gentle yet potent solution for digestive issues.",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    text: "Digestive issues improved significantly. Natural treatment worked better than expected. Felt relief from heartburn.",
     tag: "Digestion",
     stars: 5,
   },
-  {
-    id: 8,
-    name: "Vincent Danial",
-    initials: "VD",
-    text: "I seek treatment from Ms. Sejal Shah of Om Ayurveda (Natural Health Care Centre). I was treated for hives, which is a kind of skin allergy like rashes. I was given herbal powder mixtures to consume. Within three days, I realized improvement on my condition and felt better. Within a month I recovered completely. The Ayurvedic treatment and the dietary advice provided by Ms Sejal Shah is great and appreciable. I would sincerely recommend anyone seeking Ayurvedic treatment to contact Sejal of Om Ayurveda to enjoy healthy living and wellness.",
-    tag: "Skin Allergy",
-    stars: 5,
-  },
-  {
-    id: 9,
-    name: "Jane",
-    initials: "JN",
-    text: "After the first treatment of Nasya therapy I felt very light and relaxed. It felt like a weight had lifted from my head and my head felt very open and clear. Subsequent treatments also left me feeling emotional but still with the feeling of lightness. Overall, I felt that a heaviness had lifted from my mind and my head feels very open and clear.",
-    tag: "Nasya Therapy",
-    stars: 5,
-  },
-  {
-    id: 10,
-    name: "Zeo",
-    initials: "ZO",
-    text: "I consulted Ms Sejal of Om Ayurveda in mid-September for Ayurvedic treatment. I was having indigestive problems. Ms. Sejal prescribed Ayurvedic medicine to treat my indigestion problem. After consuming the medication for two months, I feel better. The symptoms did not occur again. I am very thankful to Ms. Sejal of Om Ayurveda for her ayurvedic treatment.",
-    tag: "Digestion",
-    stars: 5,
-  },
-  {
-    id: 11,
-    name: "Dushyant",
-    initials: "DU",
-    text: "I am lucky that you as an Ayurvedachrya is here in Perth. My two sons always suffered from gastro and severe constipation. After thorough examinations, Sejal Shah provided herbal medicine and in a week my son was all good with no constipation at all. In another two weeks, his bowel habits were perfect and regular. I am so thankful to Sejal Shah and will always. On top of everything, her cost of medicine is so reasonable and they are herbal — free from chemicals and their side effects. God Bless!!",
-    tag: "Children's Health",
-    stars: 5,
-  },
-  {
-    id: 12,
-    name: "J.L",
-    initials: "JL",
-    text: "Om Ayurveda is just outstanding — a complete place where you can have your treatments done by a fab lady called Sejal Shah. She is so kind, gentle, soft spoken, co-operative and many more. She gives you a beautiful environment and fantastic treatment of Ayurveda. Her products are absolutely safe and effective. Special thanks to the owner of Om Ayurveda — Sejal Shah.",
-    tag: "Overall Experience",
-    stars: 5,
-  },
-  {
-    id: 13,
-    name: "Mini Krishanan",
-    initials: "MK",
-    text: "I had my post pregnancy massage. It was truly satisfying. Thank you Sejal for great service. Look forward to coming back again.",
-    tag: "Postnatal",
-    stars: 5,
-  },
-  {
-    id: 14,
-    name: "JP",
-    initials: "JP",
-    text: "When I came to OM Ayurveda I was suffering of head tremors and my mind was totally blank, I was feeling anxious too! Dr Sejal Shah became a mentor to my life and my life changed. She gave me confidence to face my bad situations. She treated me tremendously by giving me herbs and treatments! I had recovered completely from tremors and cold and cough by Dr Sejal's referrals and suggestions and treatments of Shirodhara and Nasya. I am now healthy within 30-40 days. Big thank you Dr Sejal from bottom of my heart.",
-    tag: "Neurological",
-    stars: 5,
-  },
-  {
-    id: 15,
-    name: "MK",
-    initials: "MK",
-    text: "I am very thankful for Dr. Sejal. I came to her clinic and had lot of health issues. Food was not digest properly, had skin rash. She gave me Ayurveda treatment. Within a week, I started getting better. I recommend anyone who has got health issues to please see Sejal — OM Ayurveda.",
-    tag: "Multiple Issues",
-    stars: 5,
-  },
-  {
-    id: 16,
-    name: "KR",
-    initials: "KR",
-    text: "Shirodhara: Today I experienced this technique for the first time. Immediately, I went straight into a place of meditation. I could feel the energy of 'The Mother' — an opening of light within the tunnel. A feeling of gratefulness seemed to engulf the whole experience, the feeling of belonging. It is now 4 hours since the treatment and Anja Chakra is still vibrating.",
-    tag: "Shirodhara",
-    stars: 5,
-  },
-  {
-    id: 17,
-    name: "Kaye R.",
-    initials: "KR",
-    text: "Abhyangam — The treatment felt wonderful, I really needed the massage, my body felt so light and disconnected prior. The past 2 weeks have proved interesting — I felt so much more energy during the next day. No lethargic episodes, balanced, began my morning yoga and yoga nidra. I am naturally sleeping well without any medication. Something changed in the treatment. I am now feeling sleepy at 9:30pm — I love the feeling of being connected again.",
-    tag: "Abhyangam",
-    stars: 5,
-  },
-];
-
-const avatarColors = [
-  { bg: "#1B5E20", text: WH },
-  { bg: "#2E7D32", text: WH },
-  { bg: "#388E3C", text: WH },
-  { bg: "#43A047", text: WH },
-  { bg: "#4CAF50", text: WH },
-  { bg: "#1565C0", text: WH },
-  { bg: "#6A1B9A", text: WH },
-  { bg: "#AD1457", text: WH },
 ];
 
 const CARDS_PER_PAGE = 2;
 const totalPages = Math.ceil(testimonials.length / CARDS_PER_PAGE);
 
-const StarRating: React.FC<{ count: number }> = ({ count }) => (
+// ─── Animated Star Rating ───────────────────────────────────────────────────
+const StarRating: React.FC<{ count: number; hovered: boolean }> = ({ count, hovered }) => (
   <Box sx={{ display: "flex", gap: 0.25 }}>
     {Array.from({ length: count }).map((_, i) => (
-      <StarIcon key={i} sx={{ fontSize: 14, color: "#F59E0B" }} />
+      <StarIcon
+        key={i}
+        sx={{
+          fontSize: 14,
+          color: "#F59E0B",
+          transition: `transform 0.22s cubic-bezier(0.34,1.56,0.64,1) ${i * 55}ms`,
+          transform: hovered ? "scale(1.45)" : "scale(1)",
+        }}
+      />
     ))}
   </Box>
 );
 
+// ─── Testimonial Card ────────────────────────────────────────────────────────
 const TestimonialCard: React.FC<{
   t: (typeof testimonials)[0];
   index: number;
 }> = ({ t, index }) => {
   const [expanded, setExpanded] = useState(false);
-  const avatarColor = avatarColors[index % avatarColors.length];
+  const [hovered, setHovered] = useState(false);
   const isLong = t.text.length > 200;
   const displayText = !expanded && isLong ? t.text.slice(0, 200) + "…" : t.text;
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't navigate if user clicked the "Read more" button
+    const target = e.target as HTMLElement;
+    if (target.closest("button")) return;
+    window.open(MAPS_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <Box
+      onClick={handleCardClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       sx={{
         background: WH,
         borderRadius: "20px",
-        border: `1.5px solid ${AG}22`,
-        boxShadow: `0 2px 20px ${DG}0e`,
+        border: `1.5px solid ${hovered ? "transparent" : `${AG}22`}`,
+        boxShadow: hovered
+          ? `0 24px 60px ${DG}2e, 0 0 0 2px ${AG}`
+          : `0 2px 20px ${DG}0e`,
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
         height: "100%",
-        transition: "box-shadow .3s ease, border-color .3s ease, transform .3s ease",
-        "&:hover": {
-          transform: "translateY(-5px)",
-          boxShadow: `0 16px 48px ${DG}22`,
-          border: `1.5px solid ${AG}55`,
+        position: "relative",
+        cursor: "pointer",
+        textDecoration: "none",
+        transition:
+          "transform 0.42s cubic-bezier(0.22,1,0.36,1), box-shadow 0.42s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease",
+        transform: hovered ? "translateY(-8px) scale(1.018)" : "translateY(0) scale(1)",
+
+        // Shimmer overlay
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          inset: 0,
+          borderRadius: "20px",
+          background: `linear-gradient(135deg, ${AG}18 0%, transparent 60%)`,
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.38s ease",
+          pointerEvents: "none",
+          zIndex: 1,
         },
       }}
     >
-      {/* Top green accent bar */}
-      <Box sx={{ height: 5, background: `linear-gradient(to right, ${DG}, ${AG})` }} />
+      {/* Animated top accent bar */}
+      <Box
+        sx={{
+          height: hovered ? 4 : 3,
+          background: `linear-gradient(to right, ${DG}, ${AG})`,
+          transition: "height 0.3s ease",
+          position: "relative",
+          zIndex: 2,
+        }}
+      />
 
-      <Box sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box
+        sx={{
+          p: 3,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
         {/* Quote icon + tag */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-          <FormatQuoteIcon sx={{ fontSize: 36, color: `${AG}55`, mt: -0.5, ml: -0.5 }} />
+          <FormatQuoteIcon
+            sx={{
+              fontSize: 36,
+              color: hovered ? `${AG}bb` : `${AG}55`,
+              mt: -0.5,
+              ml: -0.5,
+              transition:
+                "color 0.3s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1)",
+              transform: hovered ? "scale(1.18) rotate(-6deg)" : "scale(1) rotate(0deg)",
+            }}
+          />
           <Chip
             label={t.tag}
             size="small"
@@ -222,17 +188,25 @@ const TestimonialCard: React.FC<{
               fontWeight: 600,
               fontSize: 10,
               letterSpacing: 0.5,
-              background: LG,
-              color: MG,
+              background: hovered ? "#C8E6C9" : LG,
+              color: hovered ? DG : MG,
               border: `1px solid ${AG}44`,
               height: 22,
+              transition: "background 0.3s ease, color 0.3s ease",
             }}
           />
         </Box>
 
         {/* Review text */}
         <Box sx={{ flex: 1 }}>
-          <Typography sx={{ fontFamily: "'Jost', sans-serif", fontSize: 14, lineHeight: 1.8, color: TEXT }}>
+          <Typography
+            sx={{
+              fontFamily: "'Jost', sans-serif",
+              fontSize: 14,
+              lineHeight: 1.8,
+              color: TEXT,
+            }}
+          >
             {displayText}
           </Typography>
           {isLong && (
@@ -258,60 +232,114 @@ const TestimonialCard: React.FC<{
         </Box>
 
         {/* Divider */}
-        <Box sx={{ height: "1px", background: `${AG}22` }} />
+        <Box
+          sx={{
+            height: "1px",
+            background: hovered ? `${AG}44` : `${AG}22`,
+            transition: "background 0.3s ease",
+          }}
+        />
 
         {/* Author row */}
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+            {/* Avatar with ring animation */}
             <Box
               sx={{
                 width: 42,
                 height: 42,
                 borderRadius: "50%",
-                background: avatarColor.bg,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                overflow: "hidden",
                 flexShrink: 0,
-                boxShadow: `0 2px 8px ${avatarColor.bg}55`,
+                border: `2px solid ${hovered ? AG : "transparent"}`,
+                boxShadow: hovered ? `0 0 0 4px ${AG}28` : "none",
+                transition:
+                  "border-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1)",
+                transform: hovered ? "scale(1.1)" : "scale(1)",
               }}
             >
-              <Typography
-                sx={{
-                  fontFamily: "'Jost', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 13,
-                  color: avatarColor.text,
-                  letterSpacing: 0.5,
-                }}
-              >
-                {t.initials}
-              </Typography>
+              <img
+                src={t.image}
+                alt={t.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
             </Box>
+
             <Box>
               <Typography
                 sx={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontWeight: 700,
                   fontSize: 16,
-                  color: DG,
+                  color: hovered ? "#0a3d0a" : DG,
                   lineHeight: 1.2,
+                  transition: "color 0.25s ease",
                 }}
               >
                 {t.name}
               </Typography>
-              <Typography sx={{ fontFamily: "'Jost', sans-serif", fontSize: 11, color: MUTED, letterSpacing: 0.3 }}>
+              <Typography
+                sx={{
+                  fontFamily: "'Jost', sans-serif",
+                  fontSize: 11,
+                  color: MUTED,
+                  letterSpacing: 0.3,
+                }}
+              >
                 Verified Patient
               </Typography>
             </Box>
           </Box>
-          <StarRating count={t.stars} />
+
+          {/* Staggered star animation */}
+          <StarRating count={t.stars} hovered={hovered} />
+        </Box>
+
+        {/* Maps hint — fades in on hover */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 0.75,
+            mt: 0.5,
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? "translateY(0)" : "translateY(6px)",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+            pointerEvents: "none",
+          }}
+        >
+          {/* Map pin SVG */}
+          <svg width="11" height="13" viewBox="0 0 11 13" fill="none">
+            <path
+              d="M5.5 0C3.015 0 1 2.015 1 4.5c0 3.375 4.5 8.5 4.5 8.5S10 7.875 10 4.5C10 2.015 7.985 0 5.5 0zm0 6.125A1.625 1.625 0 1 1 5.5 2.875a1.625 1.625 0 0 1 0 3.25z"
+              fill={MG}
+            />
+          </svg>
+          <Typography
+            sx={{
+              fontFamily: "'Jost', sans-serif",
+              fontSize: 11,
+              fontWeight: 600,
+              color: MG,
+              letterSpacing: 0.4,
+            }}
+          >
+            View on Google Maps ↗
+          </Typography>
         </Box>
       </Box>
     </Box>
   );
 };
 
+// ─── Main Page ────────────────────────────────────────────────────────────────
 const OMAyurvedaTestimonialsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -323,38 +351,59 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
   // Hero fade-in
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setHeroVis(true); obs.disconnect(); } },
+      ([e]) => {
+        if (e.isIntersecting) {
+          setHeroVis(true);
+          obs.disconnect();
+        }
+      },
       { threshold: 0.08 }
     );
     if (heroRef.current) obs.observe(heroRef.current);
     return () => obs.disconnect();
   }, []);
 
-  const goTo = useCallback(
-    (page: number) => {
-      setCurrentPage(((page % totalPages) + totalPages) % totalPages);
-    },
-    []
-  );
+  const goTo = useCallback((page: number) => {
+    setCurrentPage(((page % totalPages) + totalPages) % totalPages);
+  }, []);
 
   // Autoplay
   useEffect(() => {
     if (timerRef.current) clearInterval(timerRef.current);
     if (isPlaying) {
-      timerRef.current = setInterval(() => setCurrentPage((p) => (p + 1) % totalPages), 4000);
+      timerRef.current = setInterval(
+        () => setCurrentPage((p) => (p + 1) % totalPages),
+        4000
+      );
     }
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [isPlaying]);
 
-  const handlePrev = () => { goTo(currentPage - 1); setIsPlaying(false); };
-  const handleNext = () => { goTo(currentPage + 1); setIsPlaying(false); };
-  const handleDot = (i: number) => { goTo(i); setIsPlaying(false); };
+  const handlePrev = () => {
+    goTo(currentPage - 1);
+    setIsPlaying(false);
+  };
+  const handleNext = () => {
+    goTo(currentPage + 1);
+    setIsPlaying(false);
+  };
+  const handleDot = (i: number) => {
+    goTo(i);
+    setIsPlaying(false);
+  };
 
   // Touch swipe
-  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
   const handleTouchEnd = (e: React.TouchEvent) => {
     const dx = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(dx) > 40) { goTo(currentPage + (dx < 0 ? 1 : -1)); setIsPlaying(false); }
+    if (Math.abs(dx) > 40) {
+      goTo(currentPage + (dx < 0 ? 1 : -1));
+      setIsPlaying(false);
+    }
   };
 
   const pageSlice = testimonials.slice(
@@ -391,9 +440,13 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
             <Box
               key={i}
               sx={{
-                position: "absolute", width: c.s, height: c.s,
-                borderRadius: "50%", background: "#ffffff07",
-                top: c.t, left: c.l,
+                position: "absolute",
+                width: c.s,
+                height: c.s,
+                borderRadius: "50%",
+                background: "#ffffff07",
+                top: c.t,
+                left: c.l,
                 animation: `floatBlob${i} ${c.d} ease-in-out ${c.dl} infinite`,
                 [`@keyframes floatBlob${i}`]: {
                   "0%,100%": { transform: "translateY(0) scale(1)" },
@@ -404,17 +457,27 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
           ))}
 
           {/* Spinning OM */}
-          <Typography sx={{
-            position: "absolute", right: { xs: -12, md: 72 }, top: "50%",
-            transform: "translateY(-50%)", fontSize: { xs: 180, md: 260 },
-            fontFamily: "serif", color: "#ffffff07", lineHeight: 1,
-            userSelect: "none", pointerEvents: "none",
-            animation: "omSpin 50s linear infinite",
-            "@keyframes omSpin": {
-              from: { transform: "translateY(-50%) rotate(0deg)" },
-              to: { transform: "translateY(-50%) rotate(360deg)" },
-            },
-          }}>ॐ</Typography>
+          <Typography
+            sx={{
+              position: "absolute",
+              right: { xs: -12, md: 72 },
+              top: "50%",
+              transform: "translateY(-50%)",
+              fontSize: { xs: 180, md: 260 },
+              fontFamily: "serif",
+              color: "#ffffff07",
+              lineHeight: 1,
+              userSelect: "none",
+              pointerEvents: "none",
+              animation: "omSpin 50s linear infinite",
+              "@keyframes omSpin": {
+                from: { transform: "translateY(-50%) rotate(0deg)" },
+                to: { transform: "translateY(-50%) rotate(360deg)" },
+              },
+            }}
+          >
+            ॐ
+          </Typography>
 
           <Container maxWidth="md">
             <Box
@@ -426,37 +489,51 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
                 textAlign: "center",
               }}
             >
-              <Typography sx={{
-                fontFamily: "'Jost', sans-serif", fontWeight: 600,
-                fontSize: 12, letterSpacing: 5, color: AG,
-                textTransform: "uppercase", mb: 2,
-              }}>
+              <Typography
+                sx={{
+                  fontFamily: "'Jost', sans-serif",
+                  fontWeight: 600,
+                  fontSize: 12,
+                  letterSpacing: 5,
+                  color: AG,
+                  textTransform: "uppercase",
+                  mb: 2,
+                }}
+              >
                 Patient Stories
               </Typography>
-              <Typography sx={{
-                fontFamily: "'Cormorant Garamond', serif", fontWeight: 700,
-                fontSize: { xs: 42, md: 64 }, color: WH,
-                lineHeight: 1.05, mb: 2.5,
-              }}>
+              <Typography
+                sx={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontWeight: 700,
+                  fontSize: { xs: 42, md: 64 },
+                  color: WH,
+                  lineHeight: 1.05,
+                  mb: 2.5,
+                }}
+              >
                 Testimonials
               </Typography>
-              <Typography sx={{
-                fontFamily: "'Jost', sans-serif",
-                fontSize: { xs: 15, md: 17 }, color: "#ffffffbb",
-                maxWidth: 540, mx: "auto", lineHeight: 1.8, mb: 5,
-              }}>
-                Real experiences from our patients. Every story is a journey toward holistic health and natural healing.
+              <Typography
+                sx={{
+                  fontFamily: "'Jost', sans-serif",
+                  fontSize: { xs: 15, md: 17 },
+                  color: "#ffffffbb",
+                  maxWidth: 540,
+                  mx: "auto",
+                  lineHeight: 1.8,
+                  mb: 5,
+                }}
+              >
+                Real experiences from our patients. Every story is a journey toward
+                holistic health and natural healing.
               </Typography>
-
-              {/* Stats */}
-             
             </Box>
           </Container>
         </Box>
 
         {/* ── Slider ── */}
         <Container maxWidth="lg" sx={{ mt: 7 }}>
-          {/* Cards */}
           <Box
             sx={{ overflow: "hidden", borderRadius: "16px" }}
             onTouchStart={handleTouchStart}
@@ -481,16 +558,31 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
           </Box>
 
           {/* Controls */}
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 2, mt: 4 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 2,
+              mt: 4,
+            }}
+          >
             {/* Prev */}
             <Box
               component="button"
               onClick={handlePrev}
               sx={{
-                width: 40, height: 40, borderRadius: "50%",
-                border: `1.5px solid ${MG}44`, background: WH,
-                color: DG, fontSize: 18, cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                border: `1.5px solid ${MG}44`,
+                background: WH,
+                color: DG,
+                fontSize: 18,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 transition: "all .2s ease",
                 "&:hover": { background: LG, borderColor: MG },
               }}
@@ -524,10 +616,17 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
               component="button"
               onClick={handleNext}
               sx={{
-                width: 40, height: 40, borderRadius: "50%",
-                border: `1.5px solid ${MG}44`, background: WH,
-                color: DG, fontSize: 18, cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                border: `1.5px solid ${MG}44`,
+                background: WH,
+                color: DG,
+                fontSize: 18,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 transition: "all .2s ease",
                 "&:hover": { background: LG, borderColor: MG },
               }}
@@ -541,10 +640,17 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
               onClick={() => setIsPlaying((p) => !p)}
               title={isPlaying ? "Pause autoplay" : "Resume autoplay"}
               sx={{
-                width: 34, height: 34, borderRadius: "50%",
-                border: `1.5px solid ${MG}44`, background: WH,
-                color: DG, fontSize: 13, cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 34,
+                height: 34,
+                borderRadius: "50%",
+                border: `1.5px solid ${MG}44`,
+                background: WH,
+                color: DG,
+                fontSize: 13,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 transition: "all .2s ease",
                 "&:hover": { background: LG },
               }}
@@ -554,23 +660,19 @@ const OMAyurvedaTestimonialsPage: React.FC = () => {
           </Box>
 
           {/* Page indicator */}
-          <Typography sx={{
-            textAlign: "center", mt: 1.5,
-            fontFamily: "'Jost', sans-serif", fontSize: 12,
-            color: MUTED, letterSpacing: 0.5,
-          }}>
+          <Typography
+            sx={{
+              textAlign: "center",
+              mt: 1.5,
+              fontFamily: "'Jost', sans-serif",
+              fontSize: 12,
+              color: MUTED,
+              letterSpacing: 0.5,
+            }}
+          >
             {currentPage + 1} / {totalPages}
           </Typography>
         </Container>
-
-       
-
-        {/* Footer */}
-        <Box sx={{ textAlign: "center", mt: 8, pb: 2 }}>
-          <Typography sx={{ fontFamily: "'Jost', sans-serif", fontSize: 13, color: MUTED }}>
-            © 2024 by OM Ayurveda. All Rights Reserved.
-          </Typography>
-        </Box>
       </Box>
     </ThemeProvider>
   );
